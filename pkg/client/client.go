@@ -162,6 +162,13 @@ func (c *Client) Run() {
 
 	fmt.Printf("Finished, %v sync tasks failed, %v tasks generate failed\n", c.failedTaskList.Len(), c.failedTaskGenerateList.Len())
 	c.logger.Infof("Finished, %v sync tasks failed, %v tasks generate failed", c.failedTaskList.Len(), c.failedTaskGenerateList.Len())
+	for e := c.failedTaskList.Front(); e != nil; e = e.Next() {
+		c.logger.Infof("Fail to sync task: %+v", e.Value.(*sync.Task))
+	}
+
+	for e := c.failedTaskGenerateList.Front(); e != nil; e = e.Next() {
+		c.logger.Infof("Fail to generate sync task: %+v", e.Value.(*sync.Task))
+	}
 }
 
 // GenerateSyncTask creates synchronization tasks from source and destination url, return URLPair array if there are more than one tags
