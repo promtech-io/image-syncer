@@ -163,11 +163,13 @@ func (c *Client) Run() {
 	fmt.Printf("Finished, %v sync tasks failed, %v tasks generate failed\n", c.failedTaskList.Len(), c.failedTaskGenerateList.Len())
 	c.logger.Infof("Finished, %v sync tasks failed, %v tasks generate failed", c.failedTaskList.Len(), c.failedTaskGenerateList.Len())
 	for e := c.failedTaskList.Front(); e != nil; e = e.Next() {
-		c.logger.Infof("Fail to sync task: %+v", e.Value.(*sync.Task))
+		t := e.Value.(*sync.Task)
+		c.logger.Infof("Fail to sync task, source: %s, destination: %s", t.GetSourceImage(), t.GetDestinationImage())
 	}
 
 	for e := c.failedTaskGenerateList.Front(); e != nil; e = e.Next() {
-		c.logger.Infof("Fail to generate sync task: %+v", e.Value.(*sync.Task))
+		t := e.Value.(*sync.Task)
+		c.logger.Infof("Fail to generate sync task, source: %s, destination: %s", t.GetSourceImage(), t.GetDestinationImage())
 	}
 }
 

@@ -137,3 +137,11 @@ func (t *Task) Errorf(format string, args ...interface{}) error {
 func (t *Task) Infof(format string, args ...interface{}) {
 	t.logger.Infof(format, args...)
 }
+
+func (t *Task) GetSourceImage() string {
+	return t.source.registry + "/" + t.source.registry + ":" + t.source.tag
+}
+
+func (t *Task) GetDestinationImage() string {
+	return t.destination.registry + "/" + t.destination.registry + ":" + t.destination.tag
+}
