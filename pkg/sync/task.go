@@ -139,9 +139,9 @@ func (t *Task) Infof(format string, args ...interface{}) {
 }
 
 func (t *Task) GetSourceImage() string {
-	return t.source.registry + "/" + t.source.registry + ":" + t.source.tag
+	return t.source.registry + "/" + t.source.repository + ":" + t.source.tag
 }
 
 func (t *Task) GetDestinationImage() string {
-	return t.destination.registry + "/" + t.destination.registry + ":" + t.destination.tag
+	return t.destination.registry + "/" + t.destination.repository + ":" + t.destination.tag
 }
