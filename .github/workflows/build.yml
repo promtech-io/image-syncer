@@ -15,6 +15,7 @@ jobs:
       - name: build image-syncer
         run: |
           make cmd
+          tar -czf image-syncer.tar.gz image-syncer
       - name: Assemble Artifact
         id: assemble_artifact
         env:
@@ -29,6 +30,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
         with:
-          files: image-syncer
+          files: image-syncer.tar.gz
           tag_name: ${{ steps.assemble_artifact.outputs.release_tag }}
 
